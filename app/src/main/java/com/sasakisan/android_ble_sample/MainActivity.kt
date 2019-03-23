@@ -29,7 +29,10 @@ class MainActivity : AppCompatActivity() {
             override fun onScanResult(callbackType: Int, result: ScanResult?) {
                 super.onScanResult(callbackType, result)
                 result?.let {
-                    Log.d("DeviceName: ", result.getDevice().getName())
+                    if (result.device.name != null) {
+                        Log.d("DeviceName: ", result.device.name)
+                    }
+                    Log.d("DeviceAddress: ", result.device.address)
                 }
             }
 
@@ -44,7 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.scan.setOnClickListener {
             val scanFilter = ScanFilter.Builder()
-                .setDeviceName("DeviceName")
                 .build()
             val scanFilterList = mutableListOf<ScanFilter>()
             scanFilterList.add(scanFilter)
